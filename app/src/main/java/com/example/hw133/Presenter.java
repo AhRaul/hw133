@@ -1,13 +1,15 @@
 package com.example.hw133;
 
-public class Presenter {
+import moxy.InjectViewState;
+import moxy.MvpPresenter;
+
+@InjectViewState
+public class Presenter extends MvpPresenter<ViewInterface> {
 
     private Model model;
-    private ViewInterface viewInterface;
 
-    public Presenter (ViewInterface viewInterface) {
-        this.viewInterface = viewInterface;
-        model = new Model();
+    public Presenter () {
+        this.model = new Model();
     }
 
     private String concatenateWord(String word) {
@@ -15,9 +17,9 @@ public class Presenter {
     }
 
     public void onButtonClick(String word) {
-        String oldWord = model.getWord();
+        //String oldWord = model.getWord();
         String newWord = concatenateWord(word);
         model.setWord(newWord);
-        viewInterface.setTextView(newWord);
+        getViewState().setTextView(newWord);
     }
 }

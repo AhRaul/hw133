@@ -1,18 +1,29 @@
 package com.example.hw133;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ViewMainActivity extends AppCompatActivity implements ViewInterface{
+import moxy.MvpAppCompatActivity;
+import moxy.MvpView;
+import moxy.presenter.InjectPresenter;
+import moxy.presenter.ProvidePresenter;
+
+public class ViewMainActivity extends MvpAppCompatActivity implements ViewInterface, MvpView {
 
     private Button buttonProcess;
     private EditText editableText;
     private TextView resultText;
+
+    @InjectPresenter
     Presenter presenter;
+
+//    @ProvidePresenter
+//    public Presenter providePresenter(){
+//        return new Presenter();
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +33,6 @@ public class ViewMainActivity extends AppCompatActivity implements ViewInterface
         buttonProcess = findViewById(R.id.button);
         editableText = findViewById(R.id.editText);
         resultText = findViewById(R.id.textView2);
-
-        presenter = new Presenter(this);
 
         buttonProcess.setOnClickListener(new View.OnClickListener() {
             @Override
